@@ -1,0 +1,339 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Inter+Tight:wght@500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 3%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 7%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 7%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 187 72% 43%;
+    --primary-foreground: 222 47% 3%;
+
+    --secondary: 263 70% 58%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 30% 15%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 263 70% 58%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --success: 142 71% 45%;
+    --success-foreground: 222 47% 3%;
+
+    --border: 217 30% 15%;
+    --input: 217 30% 15%;
+    --ring: 187 72% 43%;
+
+    --radius: 0.75rem;
+
+    --glass: 0 0% 100% / 0.05;
+    --glass-border: 0 0% 100% / 0.08;
+    --glass-hover: 0 0% 100% / 0.1;
+
+    --glow-primary: 0 0 60px hsl(187 72% 43% / 0.15);
+    --glow-secondary: 0 0 60px hsl(263 70% 58% / 0.15);
+    --glow-soft: 0 0 40px hsl(187 72% 43% / 0.08);
+
+    --gradient-primary: linear-gradient(135deg, hsl(187 72% 43%), hsl(263 70% 58%));
+    --gradient-text: linear-gradient(135deg, hsl(187 72% 43%), hsl(263 70% 58%));
+    --gradient-surface: linear-gradient(135deg, hsl(0 0% 100% / 0.06), hsl(0 0% 100% / 0.02));
+
+    --sidebar-background: 222 47% 5%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 187 72% 43%;
+    --sidebar-primary-foreground: 222 47% 3%;
+    --sidebar-accent: 217 30% 15%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217 30% 15%;
+    --sidebar-ring: 187 72% 43%;
+  }
+
+  /* ── Light mode overrides ─────────────────────── */
+  .light {
+    /* Soft periwinkle-blue background instead of white */
+    --background: 230 35% 91%;
+    --foreground: 225 55% 12%;
+
+    --card: 228 40% 94%;
+    --card-foreground: 225 55% 12%;
+
+    --popover: 228 40% 94%;
+    --popover-foreground: 225 55% 12%;
+
+    /* Richer, deeper teal */
+    --primary: 187 80% 32%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Vivid purple */
+    --secondary: 263 75% 48%;
+    --secondary-foreground: 0 0% 100%;
+
+    /* Neutral surfaces */
+    --muted: 220 15% 88%;
+    --muted-foreground: 220 20% 38%;
+
+    --accent: 263 75% 48%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 80% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 145 65% 35%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 220 18% 78%;
+    --input: 220 18% 92%;
+    --ring: 187 80% 32%;
+
+    /* Glass: very subtle dark tint on white surface */
+    --glass: 220 60% 10% / 0.05;
+    --glass-border: 220 60% 10% / 0.14;
+    --glass-hover: 220 60% 10% / 0.09;
+
+    /* Glows that are visible on light bg */
+    --glow-primary: 0 6px 40px hsl(187 80% 32% / 0.22);
+    --glow-secondary: 0 6px 40px hsl(263 75% 48% / 0.18);
+    --glow-soft: 0 4px 28px hsl(187 80% 32% / 0.13);
+
+    /* Keep gradient vivid */
+    --gradient-primary: linear-gradient(135deg, hsl(187 80% 32%), hsl(263 75% 48%));
+    --gradient-text: linear-gradient(135deg, hsl(187 80% 32%), hsl(263 75% 48%));
+    --gradient-surface: linear-gradient(135deg, hsl(220 60% 10% / 0.05), hsl(220 60% 10% / 0.02));
+
+    --sidebar-background: 220 23% 92%;
+    --sidebar-foreground: 222 60% 10%;
+    --sidebar-primary: 187 80% 32%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 15% 85%;
+    --sidebar-accent-foreground: 222 60% 10%;
+    --sidebar-border: 220 18% 78%;
+    --sidebar-ring: 187 80% 32%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Inter Tight', 'Inter', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-[hsl(var(--glass))] border border-[hsl(var(--glass-border))] backdrop-blur-xl;
+    transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+  }
+
+  /* Dark mode hover: lift + teal border glow + inner highlight */
+  .glass-card-hover {
+    @apply glass-card;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-card-hover:hover {
+    background: hsl(var(--glass-hover)) !important;
+    border-color: hsl(var(--primary) / 0.35) !important;
+    box-shadow:
+      0 0 0 1px hsl(var(--primary) / 0.15),
+      0 8px 32px hsl(var(--primary) / 0.12),
+      0 2px 8px hsl(0 0% 0% / 0.25),
+      inset 0 1px 0 hsl(var(--primary) / 0.10);
+    transform: translateY(-3px);
+  }
+
+  .glass-card-hover:active {
+    transform: translateY(-1px);
+    box-shadow:
+      0 0 0 1px hsl(var(--primary) / 0.20),
+      0 4px 16px hsl(var(--primary) / 0.10),
+      inset 0 1px 0 hsl(var(--primary) / 0.08);
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+
+  .glow-secondary {
+    box-shadow: var(--glow-secondary);
+  }
+
+  .section-padding {
+    @apply px-6 py-12 md:px-12 md:py-24 lg:px-24;
+  }
+
+  /* Card lift — standalone hover for non-glass cards */
+  .card-lift {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 12px 40px hsl(var(--primary) / 0.14),
+      0 4px 16px hsl(0 0% 0% / 0.12);
+  }
+
+  .magnetic-button {
+    @apply relative overflow-hidden transition-all duration-300 ease-out;
+  }
+
+  .magnetic-button:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      var(--glow-primary),
+      0 8px 24px hsl(var(--primary) / 0.25);
+  }
+
+  .magnetic-button:active {
+    transform: translateY(-1px) scale(0.98);
+    box-shadow: var(--glow-soft);
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
+
+/* Noise texture overlay */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Light Mode Component Overrides ───────────────────────────────── */
+
+/* Body: periwinkle-indigo gradient in light mode */
+.light body {
+  background: linear-gradient(160deg, hsl(232 38% 90%) 0%, hsl(225 32% 93%) 40%, hsl(240 28% 89%) 100%);
+  min-height: 100vh;
+}
+
+/* Cards: soft periwinkle surface with drop shadows */
+.light .glass-card {
+  background: rgba(225, 230, 248, 0.88) !important;
+  border-color: rgba(100, 110, 200, 0.18) !important;
+  box-shadow: 0 2px 12px rgba(60, 70, 160, 0.08), 0 1px 3px rgba(60, 70, 160, 0.05);
+  backdrop-filter: none;
+}
+
+.light .glass-card-hover {
+  background: rgba(225, 230, 248, 0.88) !important;
+  border-color: rgba(100, 110, 200, 0.18) !important;
+  box-shadow: 0 2px 12px rgba(60, 70, 160, 0.08), 0 1px 3px rgba(60, 70, 160, 0.05);
+  backdrop-filter: none;
+  transition: all 0.25s ease;
+}
+
+.light .glass-card-hover:hover {
+  background: rgba(232, 237, 255, 0.97) !important;
+  border-color: hsl(187 80% 32% / 0.40) !important;
+  box-shadow:
+    0 0 0 1px hsl(187 80% 32% / 0.18),
+    0 12px 40px rgba(60, 70, 160, 0.16),
+    0 4px 12px rgba(60, 70, 160, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.70);
+  transform: translateY(-4px);
+}
+
+.light .glass-card-hover:active {
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 1px hsl(187 80% 32% / 0.20),
+    0 4px 16px rgba(60, 70, 160, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.50);
+}
+
+/* Section dividers more visible in light */
+.light section {
+  border-color: rgba(30, 41, 80, 0.10);
+}
+
+/* Scrollbar in light mode */
+.light ::-webkit-scrollbar-track {
+  background: hsl(220 23% 93%);
+}
+
+.light ::-webkit-scrollbar-thumb {
+  background: hsl(220 15% 78%);
+}
+
+.light ::-webkit-scrollbar-thumb:hover {
+  background: hsl(187 80% 32%);
+}
+
+/* Glow soft in light mode — layered teal shadow */
+.light .glow-soft {
+  box-shadow:
+    0 6px 28px rgba(10, 150, 170, 0.18),
+    0 2px 8px rgba(10, 150, 170, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.60);
+}
+
+/* Magnetic button — stronger press feedback in light mode */
+.light .magnetic-button:hover {
+  box-shadow:
+    0 0 0 1px hsl(187 80% 32% / 0.25),
+    0 8px 28px hsl(187 80% 32% / 0.28),
+    0 3px 10px rgba(60, 70, 160, 0.15);
+}
+
+.light .magnetic-button:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow:
+    0 3px 12px hsl(187 80% 32% / 0.20);
+}
