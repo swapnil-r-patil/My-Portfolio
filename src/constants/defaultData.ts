@@ -161,7 +161,7 @@ export const DEFAULT_NAV_LINKS = [
 ];
 export const DEFAULT_CUSTOM_SECTIONS: { id: string; title: string; content: string }[] = [];
 export const DEFAULT_CONTACT_LINKS = [
-    { type: "email", label: "Email", url: "swapnilpatil@gmail.com", iconUrl: "" },
-    { type: "github", label: "GitHub", url: "https://github.com/", iconUrl: "" },
-    { type: "linkedin", label: "LinkedIn", url: "https://linkedin.com/in/", iconUrl: "" },
+    { type: "Mail", label: "Email", url: "swapnilpatil@gmail.com", iconUrl: "" },
+    { type: "Github", label: "GitHub", url: "https://github.com/", iconUrl: "" },
+    { type: "Linkedin", label: "LinkedIn", url: "https://linkedin.com/in/", iconUrl: "" },
 ];

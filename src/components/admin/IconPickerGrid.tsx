@@ -44,8 +44,8 @@ export function IconPickerGrid({ selected, onSelect, showImageUrl, iconUrl, onIc
                             onClick={() => onSelect(name)}
                             title={name}
                             className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${isSelected
-                                    ? "bg-primary text-primary-foreground shadow-md scale-110"
-                                    : "bg-muted/60 text-muted-foreground hover:bg-primary/20 hover:text-primary"
+                                ? "bg-primary text-primary-foreground shadow-md scale-110"
+                                : "bg-muted/60 text-muted-foreground hover:bg-primary/20 hover:text-primary"
                                 }`}
                         >
                             <Icon size={14} />
@@ -59,8 +59,8 @@ export function IconPickerGrid({ selected, onSelect, showImageUrl, iconUrl, onIc
                     onClick={() => onSelect("custom")}
                     title="Custom image"
                     className={`w-8 h-8 rounded-lg flex items-center justify-center text-[9px] font-bold transition-all border ${selected === "custom"
-                            ? "bg-primary text-primary-foreground border-primary scale-110"
-                            : "bg-muted/60 text-muted-foreground hover:text-primary border-dashed border-muted-foreground/40"
+                        ? "bg-primary text-primary-foreground border-primary scale-110"
+                        : "bg-muted/60 text-muted-foreground hover:text-primary border-dashed border-muted-foreground/40"
                         }`}
                 >
                     IMG
@@ -97,10 +97,32 @@ export function IconPickerGrid({ selected, onSelect, showImageUrl, iconUrl, onIc
 export function DynamicIcon({
     iconName, iconUrl, size = 20, className = "text-primary",
 }: { iconName?: string; iconUrl?: string; size?: number; className?: string }) {
-    if (iconName && iconName !== "custom" && ICON_MAP[iconName]) {
-        const Icon = ICON_MAP[iconName];
-        return <Icon size={size} className={className} />;
+    if (iconName && iconName !== "custom") {
+        // Try exact match, then case-insensitive, then common aliases
+        const normalized = iconName.toLowerCase();
+        let matchedKey = ICON_NAMES.find(k => k.toLowerCase() === normalized);
+
+        if (!matchedKey) {
+            const aliases: Record<string, string> = {
+                "email": "Mail",
+                "gmail": "Mail",
+                "github": "Github",
+                "linkedin": "Linkedin",
+                "twitter": "Twitter",
+                "phone": "Phone",
+                "site": "Globe",
+                "web": "Globe",
+                "link": "Link"
+            };
+            if (aliases[normalized]) matchedKey = aliases[normalized];
+        }
+
+        if (matchedKey && ICON_MAP[matchedKey]) {
+            const Icon = ICON_MAP[matchedKey];
+            return <Icon size={size} className={className} />;
+        }
     }
+
     if (iconUrl) {
         if (iconUrl.startsWith("http")) {
             return <img src={iconUrl} alt="icon" style={{ width: size, height: size }} className="object-contain rounded" />;
@@ -108,6 +130,7 @@ export function DynamicIcon({
         // treat as emoji / text
         return <span style={{ fontSize: size }} className="leading-none">{iconUrl}</span>;
     }
+
     const Icon = ICON_MAP["Code2"];
     return <Icon size={size} className={className} />;
 }
