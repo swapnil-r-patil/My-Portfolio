@@ -34,7 +34,17 @@ export type HeroData = typeof DEFAULT_HERO;
 export type StatItem = (typeof DEFAULT_STATS)[0];
 export type AboutData = typeof DEFAULT_ABOUT;
 export type SkillGroup = (typeof DEFAULT_SKILLS)[0];
-export type ProjectItem = (typeof DEFAULT_PROJECTS)[0];
+export type ProjectItem = {
+    title: string;
+    description: string;
+    tech: string[];
+    featured: boolean;
+    github: string;
+    live: string;
+    images?: string[];
+    showImage?: boolean;
+    screenshotCount?: number;
+};
 export type AchievementItem = (typeof DEFAULT_ACHIEVEMENTS)[0];
 export type ExperienceItem = (typeof DEFAULT_EXPERIENCES)[0];
 export type ContactData = typeof DEFAULT_CONTACT;

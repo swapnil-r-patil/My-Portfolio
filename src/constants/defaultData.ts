@@ -62,6 +62,9 @@ export const DEFAULT_PROJECTS = [
         featured: true,
         github: "#",
         live: "#",
+        images: [],
+        showImage: false,
+        screenshotCount: 1,
     },
     {
         title: "AI Shoe Recommendation",
@@ -71,6 +74,9 @@ export const DEFAULT_PROJECTS = [
         featured: false,
         github: "#",
         live: "#",
+        images: [],
+        showImage: false,
+        screenshotCount: 1,
     },
     {
         title: "Real-Time Group Chat",
@@ -80,6 +86,9 @@ export const DEFAULT_PROJECTS = [
         featured: false,
         github: "#",
         live: "#",
+        images: [],
+        showImage: false,
+        screenshotCount: 1,
     },
     {
         title: "Social Media Management",
@@ -89,6 +98,9 @@ export const DEFAULT_PROJECTS = [
         featured: false,
         github: "#",
         live: "#",
+        images: [],
+        showImage: false,
+        screenshotCount: 1,
     },
 ];
 
